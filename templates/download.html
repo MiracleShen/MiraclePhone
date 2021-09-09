@@ -1,0 +1,38 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% block title %}
+    首页
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+    <img class="img-fluid" src="/static/images/Download.jpg">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 text-center">
+                <img class="img-fluid"
+                     src="http://ezphone.blisscloud.com/barcode/barcode_ezphone_android_google_play.png"/>
+                <p>Android版</p>
+                <a class="btn btn-warning">点击下载</a>
+            </div>
+            <div class="col-lg-3 text-center">
+                <img class="img-fluid"
+                     src="http://ezphone.blisscloud.com/barcode/barcode_ezphone_android_google_play.png"/>
+                <p>iOS版</p>
+                <a class="btn btn-warning">点击下载</a>
+            </div>
+            <div class="col-lg-3  text-center">
+                <img class="img-fluid"
+                     src="http://ezphone.blisscloud.com/barcode/barcode_ezphone_android_google_play.png"/>
+                <p>iOS版</p>
+                <a class="btn btn-warning">点击下载</a>
+            </div>
+            <div class="col-lg-3  text-center">
+                <img class="img-fluid"
+                     src="http://ezphone.blisscloud.com/barcode/barcode_ezphone_android_google_play.png"/>
+                <p>iOS版</p>
+                <a class="btn btn-warning">点击下载</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

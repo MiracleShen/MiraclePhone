@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="0385278e-3c5b-4ff6-ab85-b262305f5215" name="sh002" url="http://sh002.miraclephone.cn">
+        <fileTransfer accessType="SFTP" host="sh002.miraclephone.cn" port="222" sshConfigId="202e8568-fd1f-42a9-85a9-2c364c600fa2" sshConfig="root@sh002.miraclephone.cn:222 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

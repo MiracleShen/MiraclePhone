@@ -15,7 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include, url
+from django.contrib.staticfiles.views import serve
+import index.views
+from django.urls import path, include, re_path
+
+
+def return_static(request, path, insecure=True, **kwargs):
+    return serve(request, path, insecure, **kwargs)
+
 
 urlpatterns = [
+    re_path(r'^static/(?P<path>.*)$', return_static, name='static'),
     path('admin/', admin.site.urls),
+    path('', index.views.index),
+    path('news/', index.views.news),
+    path('download/', index.views.download),
+    path('customer/', index.views.customer),
+    path('partner/', index.views.partner),
+    path('price/', index.views.price),
+    path('us/', index.views.us)
 ]

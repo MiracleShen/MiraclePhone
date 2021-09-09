@@ -1,0 +1,118 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% block title %}
+    首页
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+    {#    <table>#}
+    {#        {% for q in qs %}#}
+    {#            <tr>#}
+    {#                <td>{{ q.Zip }}</td>#}
+    {#                <td>{{ q.Number }}</td>#}
+    {#                <td>{{ q.Stars }}</td>#}
+    {#                <td>{{ q.Operator }}</td>#}
+    {#                <td>{{ q.Status }}</td>#}
+    {#                <td>{{ q.Organize }}</td>#}
+    {#            </tr>#}
+    {#        {% endfor %}#}
+    {#    </table>#}
+    <table
+  data-toggle="table"
+  data-url={{ qs }}
+  data-pagination="true"
+  data-search="true">
+  <thead>
+    <tr>
+      <th data-sortable="true" data-field="Zip">区号</th>
+      <th data-field="Numbers">号码</th>
+      <th data-field="Stars">星级</th>
+    </tr>
+  </thead>
+</table>
+    <table data-toggle="table" id="example-1">
+        <tr>
+            <td>
+                <input type="text" v-model="search">
+            </td>
+        </tr>
+        <tr>
+            <th>区号</th>
+            <th>号码</th>
+            <th>星级</th>
+            <th>运营商</th>
+            <th>状态</th>
+            <th>组织</th>
+        </tr>
+        <tr v-for="num in items">
+            <td>[[num.Zip]]</td>
+            <td>[[num.Numbers]]</td>
+            <td>[[num.Stars]]</td>
+            <td>[[num.Operator]]</td>
+            <td>[[num.Status]]</td>
+            <td>[[num.Organize]]</td>
+        </tr>
+    </table>
+    <script>
+
+        var example1 = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#example-1',
+            data: {
+                search: '',
+                {#Numbers: [{'Zip': '021', 'Number': 31770688, 'Stars': '普通号', 'Operator': '中国移动', 'Status': '已售', 'Organize': '上海慈俭网络科技'}, ]#}
+                Num: {{ qs|safe }}
+            },
+            computed: {
+                // 筛选指定字段
+                items: function () {
+                    let _search = this.search;
+                    let reg = new RegExp(_search, 'ig');// 不区分大小写
+                    if (_search) {
+                        return this.Num.filter(function (item) {
+                            if (item.Organize.match(reg) || item.Numbers.match(reg) || item.Status.match(reg) ||  item.Stars.match(reg) ) {
+                                return item;
+                            }
+                        });
+                    }
+                    return this.Num;
+                },
+                // 筛选所有的字段
+                itemss: function () {
+                    var _search = this.search;
+                    console.log(_search);
+                    if (_search) {
+                        // 不区分大小写处理
+                        var reg = new RegExp(_search, 'ig')
+                        // es6 filter过滤匹配，有则返回当前，无则返回所有
+                        return this.Numbers.filter(function (e) {
+                            // 匹配所有字段
+                            return Object.keys(e).some(function (key) {
+                                return e[key].match(reg);
+                            })
+                            // 匹配某个字段
+                            // return e.name.match(reg);
+                        })
+                    }
+                    ;
+                    return this.list;
+                }
+            },
+            ready: function () {
+
+            },
+            watch: {
+                items: {
+                    handler: function (val, oldval) {
+
+                    },
+                    deep: true
+                }
+            },
+
+            methods: {}
+        })
+    </script>
+{% endblock content %}
