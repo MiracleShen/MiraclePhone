@@ -31,6 +31,7 @@ urlpatterns = [
     path('', index.views.index),
     path('news/', index.views.news),
     path('download/', index.views.download),
+    path('number/', index.views.number),
     path('customer/', index.views.customer),
     path('partner/', index.views.partner),
     path('price/', index.views.price),

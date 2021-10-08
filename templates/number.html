@@ -1,7 +1,7 @@
 <!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
 {% block title %}
-    客户
+    选号
 {% endblock title %}
 
 <!-- 写入 base.html 中定义的 content -->
@@ -61,19 +61,19 @@
     {#    </div>#}
     <div class="">
 
-        <div class="container" id="Users-1">
+        <div class="container" id="example-1">
             <div class="row m-auto align-items-center">
                     <input type="text" v-model="search">可直接输入号码、星级、运营商来查询所需号码
             </div>
             <div class="row">
-                <div class="col-lg-3" v-for="u in items">
+                <div class="col-lg-3" v-for="num in items">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body text-center">
-                            <h4 class="card-title text-center text-danger" >[[u.last_name]][[u.first_name]]</h4>
-{#                            <p class="text-dark">[[num.Stars]]</p>#}
-{#                            <p class="text-dark">[[num.Operator]]</p>#}
+                            <h4 class="card-title text-center text-danger">[[num.Zip]]-[[num.Numbers]]</h4>
+                            <p class="text-dark">[[num.Stars]]</p>
+                            <p class="text-dark">[[num.Operator]]</p>
 {#                            <p class="text-dark">[[num.Organize]]</p>#}
-{#                            <h4 class="text-success">[[num.Status]]</h4>#}
+                            <h4 class="text-success">[[num.Status]]</h4>
                         </div>
                     </div>
                 </div>
@@ -81,12 +81,13 @@
         </div>
     </div>
     <script>
+
         var example1 = new Vue({
             delimiters: ['[[', ']]'],
-            el: '#Users-1',
+            el: '#example-1',
             data: {
                 search: '',
-                Users: {{ qs|safe }}
+                Num: {{ qs|safe }}
             },
             computed: {
                 // 筛选指定字段
@@ -95,14 +96,34 @@
                     let _search = this.search;
                     let reg = new RegExp(_search, 'ig');// 不区分大小写
                     if (_search) {
-                        return this.Users.filter(function (item) {
-                            if (item.first_name.match(reg) || item.last_name.match(reg)) {
+                        return this.Num.filter(function (item) {
+                            if (item.Operator.match(reg) || item.Numbers.match(reg) || item.Status.match(reg) || item.Stars.match(reg)) {
                                 return item;
                             }
                         });
                     }
-                    return this.Users;
+                    return this.Num;
                 },
+                // 筛选所有的字段
+                itemss: function () {
+                    var _search = this.search;
+                    console.log(_search);
+                    if (_search) {
+                        // 不区分大小写处理
+                        var reg = new RegExp(_search, 'ig')
+                        // es6 filter过滤匹配，有则返回当前，无则返回所有
+                        return this.Numbers.filter(function (e) {
+                            // 匹配所有字段
+                            return Object.keys(e).some(function (key) {
+                                return e[key].match(reg);
+                            })
+                            // 匹配某个字段
+                            // return e.name.match(reg);
+                        })
+                    }
+                    ;
+                    return this.list;
+                }
             },
             ready: function () {
 

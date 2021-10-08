@@ -25,8 +25,18 @@ def download(req):
     context = {'qs': qs, }
     return render(req, "download.html", context)
 
-
 def customer(req):
+    url = 'http://www.miracleos.cn/api/users/?format=json'
+    data = json.dumps({})
+    qs = requests.get(url, data, auth=('admin', 'Kind2021'))
+    qs = qs.json()
+    str = json.dumps(qs)
+    # str =str.replace("127.0.0.1:8001","www.miracleos.cn")
+    qs = str
+    context = {}
+    context['qs'] = qs
+    return render(req, "customer.html", context)
+def number(req):
     url = 'http://sh002.miraclephone.cn/api/MiracleNumber/?format=json'
     data = json.dumps({"name": "test_repo", "description": "Some test repo"})
     qs = requests.get(url, data, auth=('admin', 'Kind2021'))
@@ -34,9 +44,10 @@ def customer(req):
     str = json.dumps(qs)
     str =str.replace("Number","Numbers")
     qs = json.loads(str)
+    qs.sort(key= lambda x:x["Stars"],reverse=True)
     context = {}
     context['qs'] = qs
-    return render(req, "customer.html", context)
+    return render(req, "number.html", context)
 
 
 def partner(req):
