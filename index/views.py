@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render, HttpResponse
-from index.models import News
+from index.models import News,Service
 import requests, json
 
 
@@ -57,8 +57,10 @@ def partner(req):
 
 
 def price(req):
-    qs = News.objects.all()
-    context = {'qs': qs, }
+    qs_P = Service.objects.filter(Type='Phone').order_by('idx')
+    qs_B = Service.objects.filter(Type='PBX').order_by('idx')
+    qs_N = Service.objects.filter(Type='Number').order_by('idx')
+    context = {'qs_P': qs_P,'qs_B':qs_B,'qs_N':qs_N }
     return render(req, "price.html", context)
 
 

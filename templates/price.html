@@ -6,27 +6,73 @@
 
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
-<img class="img-fluid" src="/static/images/News.jpg">
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                {% for news in qs %}
-                    <div class="col-lg-4">
-                    <div class="card mb-4 shadow-sm">
-                    <img class="img-fluid" src="/static/images/Miracle-Logo-1.png" width="100%" height="225">
-                        <div class="card-body">
-                            <h4 class="card-title text-center text-success">{{ news.Title }}</h4>
-                            <p class="card-text text-center">{{ news.Content }}</p>
-                            <div class="text-center align-items-center">
-                                <div class="btn-group text-center align-items-center">
-                                    <button type="button" class="btn btn-warning">查看更多 »</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+
+    <h2 class="text-center">Miracle Phone价目表</h2>
+    <table class="d-table table-bordered table-responsive">
+        <thead>
+        <th>项目</th>
+{#        <th>必要性</th>#}
+        <th>单价</th>
+        <th>单位</th>
+{#        <th>备注</th>#}
+        </thead>
+        <tbody>
+
+        {% for i in qs_P %}
+            <tr>
+            <td>{{ i.Name }}</td>
+{#            <td>{{ i.Must }}</td>#}
+            <td>{{ i.Price }}</td>
+            <td>{{ i.Unit }}</td>
+{#            <td>{{ i.Memo }}</td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+    <h2 class="text-center">Miracle PBX价目表</h2>
+    <table class="d-table table-bordered table-responsive">
+        <thead>
+        <th>项目</th>
+{#        <th>必要性</th>#}
+        <th>单价</th>
+        <th>单位</th>
+{#        <th>备注</th>#}
+        </thead>
+        <tbody>
+
+        {% for i in qs_B %}
+            <tr>
+            <td>{{ i.Name }}</td>
+{#            <td>{{ i.Must }}</td>#}
+            <td>{{ i.Price }}</td>
+            <td>{{ i.Unit }}</td>
+{#            <td>{{ i.Memo }}</td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <h2 class="text-center">Miracle Number价目表</h2>
+    <table class="d-table table-bordered table-responsive">
+        <thead>
+        <th>项目</th>
+{#        <th>必要性</th>#}
+        <th>单价</th>
+        <th>单位</th>
+{#        <th>备注</th>#}
+        </thead>
+        <tbody>
+
+        {% for i in qs_N %}
+            <tr>
+            <td>{{ i.Name }}</td>
+{#            <td>{{ i.Must }}</td>#}
+            <td>{{ i.Price }}</td>
+            <td>{{ i.Unit }}</td>
+{#            <td>{{ i.Memo }}</td>#}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock content %}
