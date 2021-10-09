@@ -1,0 +1,54 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% block title %}
+    园区
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+    <h1 class="text-center">Miracle园区服务等级</h1>
+    <div class="  d-none d-sm-block">
+        <table class="d-table table-bordered table-responsive">
+            <thead>
+            <th>城市</th>
+            <th>区县</th>
+            <th>乡镇街道</th>
+            <th>园区名称</th>
+            <th>地址</th>
+            <th>标准</th>
+            <th>管理员</th>
+            </thead>
+            {% for i in qs %}
+                <tr>
+                    <td>{{ i.City }}</td>
+                    <td>{{ i.District }}</td>
+                    <td>{{ i.Town }}</td>
+                    <td>{{ i.Name }}</td>
+                    <td>{{ i.Address }}</td>
+                    <td>{{ i.Level }}</td>
+                    <td>{{ i.Manager }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class=" d-block d-sm-none">
+        <table class="d-table table-bordered table-responsive">
+            <thead>
+{#            <th>区县</th>#}
+{#            <th>乡镇街道</th>#}
+            <th>园区名称</th>
+            <th>标准</th>
+            <th>管理员</th>
+            </thead>
+            {% for i in qs %}
+                <tr>
+{#                    <td>{{ i.District }}</td>#}
+{#                    <td>{{ i.Town }}</td>#}
+                    <td>{{ i.Name }}</td>
+                    <td>{{ i.Level }}</td>
+                    <td>{{ i.Manager }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}

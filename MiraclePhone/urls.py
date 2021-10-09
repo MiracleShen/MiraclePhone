@@ -33,7 +33,7 @@ urlpatterns = [
     path('download/', index.views.download),
     path('number/', index.views.number),
     path('customer/', index.views.customer),
-    path('partner/', index.views.partner),
+    path('park/', index.views.park),
     path('price/', index.views.price),
     path('us/', index.views.us)
 ]
